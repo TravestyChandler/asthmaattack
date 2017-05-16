@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
@@ -60,6 +61,10 @@ public class PlayerController : MonoBehaviour {
            breathMeter = Mathf.Clamp(breathMeter + (Time.deltaTime * breathChange), 0f, 100f);
         }
         breathSlider.value = breathMeter;
+        if (Input.GetKeyDown(KeyCode.Backslash))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
 	}
 
     public bool IsGrounded()

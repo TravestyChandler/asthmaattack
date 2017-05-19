@@ -29,10 +29,15 @@ public class PlayerController : MonoBehaviour {
     public RectTransform gameOverPanel;
     public RectTransform levelCompletePanel;
     public Slider breathSlider;
+
+	//ANIMATION
+	private Animator anim;
 	// Use this for initialization
 	void Start () {
         currentPhase = GamePhase.Playing;
         rb = this.GetComponent<Rigidbody2D>();
+//		anim = this.GetComponentInChildren<Animator>();
+
 	}
 	
 	// Update is called once per frame
@@ -84,6 +89,9 @@ public class PlayerController : MonoBehaviour {
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
+
+			//ANIMATIONS
+
         }
 	}
     public void LevelComplete()

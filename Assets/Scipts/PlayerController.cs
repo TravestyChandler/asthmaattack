@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
         currentPhase = GamePhase.Playing;
         rb = this.GetComponent<Rigidbody2D>();
-//		anim = this.GetComponentInChildren<Animator>();
+		anim = this.GetComponentInChildren<Animator>();
 
 	}
 	
@@ -91,7 +91,14 @@ public class PlayerController : MonoBehaviour {
             }
 
 			//ANIMATIONS
-
+			anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
+			if (rb.velocity.x < -0.1f) {
+				transform.localScale = new Vector3 (-(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+			}
+			if (rb.velocity.x > 0.1f) {
+				print ("FLIP");
+				transform.localScale = new Vector3 ((transform.localScale.x), transform.localScale.y, transform.localScale.z);
+			}
         }
 	}
     public void LevelComplete()

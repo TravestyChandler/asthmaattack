@@ -93,12 +93,19 @@ public class PlayerController : MonoBehaviour {
 			//ANIMATIONS
 			anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
 			if (rb.velocity.x < -0.1f) {
-				transform.localScale = new Vector3 (-(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				if (transform.localScale.x >= 0.0f) {
+					transform.localScale = new Vector3 (-(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				}
 			}
 			if (rb.velocity.x > 0.1f) {
 				print ("FLIP");
+				if (transform.localScale.x <= 0.0f) {
+					transform.localScale = new Vector3 (-(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				}
 				transform.localScale = new Vector3 ((transform.localScale.x), transform.localScale.y, transform.localScale.z);
 			}
+			anim.SetBool ("Grounded", IsGrounded ());
+			anim.SetFloat ("Breath", breathMeter);
         }
 	}
     public void LevelComplete()

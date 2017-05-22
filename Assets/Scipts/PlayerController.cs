@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour {
 	//INHALER
 	public int inhalerCharges = 2;
 	private bool takingInhaler = false;
+	private float hazardDecrement = 0f;
+	private float hazardTimer = 0.5f;
 	//INHALER UI
 	public Text inhalerText;
 
@@ -122,6 +124,14 @@ public class PlayerController : MonoBehaviour {
 			} else if (inhalerCharges == 0) {
 				inhalerText.text = "x 0";
 			}
+
+			//HAZARD DECREMENT (every second your inside)
+			hazardTimer -= Time.deltaTime;
+			if (hazardTimer <= 0) {
+				breathMeter -= hazardDecrement;
+				hazardTimer = 0.5f;
+			}
+
 
 			//ANIMATIONS
 			anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
@@ -218,10 +228,20 @@ public class PlayerController : MonoBehaviour {
             }
             Destroy(game);
         }
+		if (col.tag == "hazard") {
+			hazardDecrement = 15f;
+		}
         if(col.tag == "endoflevel")
         {
             currentPhase = GamePhase.Victory;
             LevelComplete();
         }
     }
+
+	public void OnTriggerExit2D(Collider2D col) {
+
+		if (col.tag == "hazard") {
+			hazardDecrement = 0f;
+		}
+	}
 }

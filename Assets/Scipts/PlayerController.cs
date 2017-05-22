@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour {
 
 	//ANIMATION
 	private Animator anim;
+	public GameObject player;
 	// Use this for initialization
 	void Start () {
         currentPhase = GamePhase.Playing;
@@ -125,16 +126,16 @@ public class PlayerController : MonoBehaviour {
 			//ANIMATIONS
 			anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
 			if (rb.velocity.x < -0.1f) {
-				if (transform.localScale.x >= 0.0f) {
-					transform.localScale = new Vector3 (-(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				if (player.transform.localScale.x >= 0.0f) {
+					player.transform.localScale = new Vector3 (-(player.transform.localScale.x), player.transform.localScale.y, player.transform.localScale.z);
 				}
 			}
 			if (rb.velocity.x > 0.1f) {
 				print ("FLIP");
-				if (transform.localScale.x <= 0.0f) {
-					transform.localScale = new Vector3 (-(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				if (player.transform.localScale.x <= 0.0f) {
+					player.transform.localScale = new Vector3 (-(player.transform.localScale.x), player.transform.localScale.y, player.transform.localScale.z);
 				}
-				transform.localScale = new Vector3 ((transform.localScale.x), transform.localScale.y, transform.localScale.z);
+				player.transform.localScale = new Vector3 ((player.transform.localScale.x), player.transform.localScale.y, player.transform.localScale.z);
 			}
 			anim.SetBool ("Grounded", IsGrounded ());
 			anim.SetFloat ("Breath", breathMeter);

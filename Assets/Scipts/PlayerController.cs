@@ -30,6 +30,10 @@ public class PlayerController : MonoBehaviour {
     public RectTransform levelCompletePanel;
     public Slider breathSlider;
 
+	//INHALER
+	public int inhalerCharges = 2;
+	private bool takingInhaler = false;
+
 	//ANIMATION
 	private Animator anim;
 	// Use this for initialization
@@ -42,7 +46,7 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
+		anim.SetBool ("Inhaler", takingInhaler);
         if (currentPhase == GamePhase.Playing)
         {
             if (breathMeter <= 0f)
@@ -90,6 +94,24 @@ public class PlayerController : MonoBehaviour {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
 
+			//INHALER FUNCTIONALITY
+			if (Input.GetKeyDown (KeyCode.Q)) {
+				if (IsGrounded ()) {
+					if (inhalerCharges > 0) {
+						takingInhaler = true;
+						if (breathMeter + 50 >= 100) {
+							breathMeter = 100;
+						} else {
+							breathMeter = breathMeter + 50;
+						}
+						inhalerCharges--;
+					}
+					anim.SetTrigger ("ExitInhaler");
+					Invoke ("WaitForInhaler", 1.0f);
+				}
+			}
+
+
 			//ANIMATIONS
 			anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
 			if (rb.velocity.x < -0.1f) {
@@ -108,6 +130,10 @@ public class PlayerController : MonoBehaviour {
 			anim.SetFloat ("Breath", breathMeter);
         }
 	}
+	public void WaitForInhaler() {
+		takingInhaler = false;
+	}
+
     public void LevelComplete()
     {
         StartCoroutine(LevelCompleteScreen());

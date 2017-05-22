@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour {
 	//INHALER
 	public int inhalerCharges = 2;
 	private bool takingInhaler = false;
+	//INHALER UI
+	public Text inhalerText;
 
 	//ANIMATION
 	private Animator anim;
@@ -111,6 +113,14 @@ public class PlayerController : MonoBehaviour {
 				}
 			}
 
+			//INHALER UI
+			if (inhalerCharges == 2) {
+				inhalerText.text = "x 2";
+			} else if (inhalerCharges == 1) {
+				inhalerText.text = "x 1";
+			} else if (inhalerCharges == 0) {
+				inhalerText.text = "x 0";
+			}
 
 			//ANIMATIONS
 			anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));

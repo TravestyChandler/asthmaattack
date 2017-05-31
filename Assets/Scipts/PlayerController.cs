@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour {
 
     public float breathMeter = 100f;
     public float breathChange = 0.5f;
-	public float breathInhalerChange = 10f;
+	public float breathInhalerChange = 15f;
     public RectTransform gameOverPanel;
     public RectTransform levelCompletePanel;
     public Slider breathSlider;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour {
 	private bool takingInhaler = false;
 	private float hazardDecrement = 0f;
 	private float hazardTimer = 0.5f;
-	public float inhalerTimer = 5.0f;
+	public float inhalerTimer = 7.0f;
 	public bool inhalerTaken = false;
 	//INHALER UI
 	public Text inhalerText;

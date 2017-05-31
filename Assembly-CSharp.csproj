@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\DogController.cs" />
+     <Compile Include="Assets\Scipts\Cigarette.cs" />
+     <Compile Include="Assets\Scipts\CigaretteSpawner.cs" />
      <Compile Include="Assets\Scipts\Collectible.cs" />
      <Compile Include="Assets\Scipts\EnvironmentHazard.cs" />
      <Compile Include="Assets\Scipts\PlayerController.cs" />

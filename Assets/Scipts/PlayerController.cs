@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 
     public float breathMeter = 100f;
     public float breathChange = 0.5f;
+	public float breathInhalerChange = 10f;
     public RectTransform gameOverPanel;
     public RectTransform levelCompletePanel;
     public Slider breathSlider;
@@ -120,7 +121,7 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			if (inhalerTaken == true) {
-				breathMeter = Mathf.Clamp(breathMeter + (Time.deltaTime * breathChange), 0f, 100f);
+				breathMeter = Mathf.Clamp(breathMeter + (Time.deltaTime * breathInhalerChange), 0f, 100f);
 				Invoke ("InhalerDuration", inhalerTimer);
 			}
 

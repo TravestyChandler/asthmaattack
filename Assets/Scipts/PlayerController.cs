@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
 	private bool takingInhaler = false;
 	private float hazardDecrement = 0f;
 	private float hazardTimer = 0.5f;
+	public float inhalerTimer = 5.0f;
+	public bool inhalerTaken = false;
 	//INHALER UI
 	public Text inhalerText;
 
@@ -91,7 +93,7 @@ public class PlayerController : MonoBehaviour {
             }
             else
             {
-                breathMeter = Mathf.Clamp(breathMeter + (Time.deltaTime * breathChange), 0f, 100f);
+//                breathMeter = Mathf.Clamp(breathMeter + (Time.deltaTime * breathChange), 0f, 100f);
             }
             breathSlider.value = breathMeter;
             if (Input.GetKeyDown(KeyCode.Backslash))
@@ -104,16 +106,22 @@ public class PlayerController : MonoBehaviour {
 				if (IsGrounded ()) {
 					if (inhalerCharges > 0) {
 						takingInhaler = true;
-						if (breathMeter + 50 >= 100) {
-							breathMeter = 100;
-						} else {
-							breathMeter = breathMeter + 50;
-						}
+						inhalerTaken = true;
+//						if (breathMeter + 50 >= 100) {
+//							breathMeter = 100;
+//						} else {
+//							breathMeter = breathMeter + 50;
+//						}
 						inhalerCharges--;
 					}
 					anim.SetTrigger ("ExitInhaler");
 					Invoke ("WaitForInhaler", 1.0f);
 				}
+			}
+
+			if (inhalerTaken == true) {
+				breathMeter = Mathf.Clamp(breathMeter + (Time.deltaTime * breathChange), 0f, 100f);
+				Invoke ("InhalerDuration", inhalerTimer);
 			}
 
 			//INHALER UI
@@ -153,6 +161,9 @@ public class PlayerController : MonoBehaviour {
 	}
 	public void WaitForInhaler() {
 		takingInhaler = false;
+	}
+	public void InhalerDuration() {
+		inhalerTaken = false;
 	}
 
     public void LevelComplete()

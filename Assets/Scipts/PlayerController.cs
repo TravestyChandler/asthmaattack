@@ -126,7 +126,15 @@ public class PlayerController : MonoBehaviour {
 			}
 
 			//INHALER UI
-			if (inhalerCharges == 2) {
+			if (inhalerCharges == 5) {
+				inhalerText.text = "x 5";
+			}
+			else if (inhalerCharges == 4) {
+				inhalerText.text = "x 4";
+			} else if (inhalerCharges == 3) {
+				inhalerText.text = "x 3";
+			}
+			else if (inhalerCharges == 2) {
 				inhalerText.text = "x 2";
 			} else if (inhalerCharges == 1) {
 				inhalerText.text = "x 1";
@@ -226,6 +234,10 @@ public class PlayerController : MonoBehaviour {
 
     public void OnTriggerEnter2D(Collider2D col)
     {
+		if (col.tag == "inhaler") {
+			inhalerCharges++;
+			Destroy (col.gameObject);
+		}
         if(col.tag == "collectible")
         {
             GameObject game = col.gameObject;

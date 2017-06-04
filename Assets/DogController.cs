@@ -74,6 +74,7 @@ public class DogController : MonoBehaviour {
 
 	private void EnterStayState() {
 		currentState = STATE.STAY;
+		rb.velocity = Vector2.zero;
 //		stayTimer = Random.Range (1f, 5f);
 		stayTimer = 2f;
 		UpdateStay ();

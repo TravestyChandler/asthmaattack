@@ -6,11 +6,15 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
+    //Singleton
+    public static PlayerController Instance;
+
     public enum GamePhase
     {
         Playing,
         Victory,
         GameOver,
+        Starting,
         Invalid
     }
 
@@ -44,9 +48,28 @@ public class PlayerController : MonoBehaviour {
 	//ANIMATION
 	private Animator anim;
 	public GameObject player;
+
+    //Level Code
+    public float[] levelTimers;
+    public string[] levels;
+    private float currentLevelTimer = 90f;
+    private float levelCountdownTimer = 0f;
+    public Text levelTimerText;
+
+
 	// Use this for initialization
 	void Start () {
-        currentPhase = GamePhase.Playing;
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+        DontDestroyOnLoad(this.gameObject);
+        currentPhase = GamePhase.Starting;
         rb = this.GetComponent<Rigidbody2D>();
 		anim = this.GetComponentInChildren<Animator>();
 
@@ -57,7 +80,9 @@ public class PlayerController : MonoBehaviour {
 		anim.SetBool ("Inhaler", takingInhaler);
         if (currentPhase == GamePhase.Playing)
         {
-            if (breathMeter <= 0f)
+            levelCountdownTimer += Time.deltaTime;
+            levelTimerText.text = "Time Left: " + (currentLevelTimer - levelCountdownTimer).ToString("0.0");
+            if (breathMeter <= 0f || (levelCountdownTimer > currentLevelTimer))
             {
                 currentPhase = GamePhase.GameOver;
                 GameOver();
@@ -87,7 +112,7 @@ public class PlayerController : MonoBehaviour {
             {
                 rb.velocity = new Vector2(-movementSpeed * speedMutliplier, rb.velocity.y);
             }
-            Debug.Log(rb.velocity.x);
+            //Debug.Log(rb.velocity.x);
             if (Mathf.Abs(rb.velocity.x) > 0.1f)
             {
                 breathMeter = Mathf.Clamp(breathMeter - (Time.deltaTime * breathChange), 0f, 100f);
@@ -168,6 +193,21 @@ public class PlayerController : MonoBehaviour {
 			anim.SetFloat ("Breath", breathMeter);
         }
 	}
+
+    public void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelLoaded;
+    }
+
+    public void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelLoaded;
+    }
+
+    public void OnLevelLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ResetPlayer();
+    }
 	public void WaitForInhaler() {
 		takingInhaler = false;
 	}
@@ -194,18 +234,14 @@ public class PlayerController : MonoBehaviour {
 
     public void GameOver()
     {
-        StartCoroutine(ShowGameOverScreen());
+        MainUI.Instance.GameOver();
     }
-    public IEnumerator ShowGameOverScreen()
+    
+    public void ResetPlayer()
     {
-        float timer = 0f;
-        while(timer < .5f)
-        {
-            float scaleVal = Mathf.Lerp(0f, 1f, timer / 0.5f);
-            gameOverPanel.localScale = Vector3.one * scaleVal;
-            timer += Time.deltaTime;
-            yield return null;
-        }
+        breathMeter = 100f;
+        this.transform.position = Vector3.zero;
+        levelCountdownTimer = 0f;
     }
 
     public bool IsGrounded()

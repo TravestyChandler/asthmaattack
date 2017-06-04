@@ -8,10 +8,16 @@ public class GM : MonoBehaviour {
 	public GameObject startScreen;
 
 	void Awake() {
-		if (instance == null)
-			instance = this;
-		else if (instance != this)
-			Destroy (gameObject);
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 	}
 
 	// Use this for initialization
@@ -24,9 +30,15 @@ public class GM : MonoBehaviour {
 	void Update () {
 
 	}
+    public void ShowStartGame()
+    {
+        startScreen.SetActive(true);
+        Time.timeScale = 0.0f;
+    }
 
 	public void StartGame() {
 		startScreen.SetActive (false);
+        PlayerController.Instance.currentPhase = PlayerController.GamePhase.Playing;
 		Time.timeScale = 1.0f;
 	}
 }

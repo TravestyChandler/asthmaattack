@@ -242,6 +242,8 @@ public class PlayerController : MonoBehaviour {
         breathMeter = 100f;
         this.transform.position = Vector3.zero;
         levelCountdownTimer = 0f;
+        inhalerCharges = 2;
+        hazardDecrement = 0f;
     }
 
     public bool IsGrounded()

@@ -31,6 +31,7 @@ public class GM : MonoBehaviour {
 	void Start () {
 		startScreen.SetActive (true);
 		Time.timeScale = 0.0f;
+
 	}
 	
 	// Update is called once per frame
@@ -48,14 +49,14 @@ public class GM : MonoBehaviour {
         PlayerController.Instance.currentPhase = PlayerController.GamePhase.Playing;
 		Time.timeScale = 1.0f;
 	}
-
-	public void ShowLevelSelect() {
-		levelSelectButton.SetActive (false);
-		startButton.SetActive (false);
-		levelSelectMenu.SetActive (true);
-	}
-
-	public void LoadLevel(string levelName) {
-		SceneManager.LoadScene (levelName);
-	}
+//
+//	public void ShowLevelSelect() {
+//		levelSelectButton.SetActive (false);
+//		startButton.SetActive (false);
+//		levelSelectMenu.SetActive (true);
+//	}
+//
+//	public void LoadLevel(string levelName) {
+//		SceneManager.LoadScene (levelName);
+//	}
 }

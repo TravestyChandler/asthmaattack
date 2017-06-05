@@ -286,7 +286,8 @@ public class PlayerController : MonoBehaviour {
             }
             if (collect.collType == Collectible.CollectibleType.Bad)
             {
-                breathMeter -= collect.collectibleBreathChange;
+//                breathMeter -= collect.collectibleBreathChange;
+				breathMeter -= 10f;
             }
             Destroy(game);
         }

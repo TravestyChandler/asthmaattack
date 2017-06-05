@@ -1,11 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour {
 
 	public static GM instance = null;
 	public GameObject startScreen;
+
+
+	//MAIN MENU
+	public GameObject startButton;
+	public GameObject levelSelectButton;
+	public GameObject levelSelectMenu;
 
 	void Awake() {
         if (instance == null)
@@ -40,5 +47,15 @@ public class GM : MonoBehaviour {
 		startScreen.SetActive (false);
         PlayerController.Instance.currentPhase = PlayerController.GamePhase.Playing;
 		Time.timeScale = 1.0f;
+	}
+
+	public void ShowLevelSelect() {
+		levelSelectButton.SetActive (false);
+		startButton.SetActive (false);
+		levelSelectMenu.SetActive (true);
+	}
+
+	public void LoadLevel(string levelName) {
+		SceneManager.LoadScene (levelName);
 	}
 }

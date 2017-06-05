@@ -46,12 +46,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DogController.cs" />
-     <Compile Include="Assets\GM.cs" />
      <Compile Include="Assets\Scipts\Cigarette.cs" />
      <Compile Include="Assets\Scipts\CigaretteSpawner.cs" />
      <Compile Include="Assets\Scipts\Collectible.cs" />
+     <Compile Include="Assets\Scipts\DogController.cs" />
      <Compile Include="Assets\Scipts\EnvironmentHazard.cs" />
+     <Compile Include="Assets\Scipts\GM.cs" />
      <Compile Include="Assets\Scipts\MainUI.cs" />
      <Compile Include="Assets\Scipts\PlayerController.cs" />
      <Compile Include="Assets\Scipts\Scroll.cs" />

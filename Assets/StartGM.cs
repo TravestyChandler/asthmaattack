@@ -9,6 +9,7 @@ public class StartGM : MonoBehaviour {
 
 	//MAIN MENU
 	public GameObject startButton;
+	public GameObject controlButton;
 	public GameObject levelSelectButton;
 	public GameObject levelSelectMenu;
 
@@ -38,11 +39,17 @@ public class StartGM : MonoBehaviour {
 
 	public void ShowLevelSelect() {
 		levelSelectButton.SetActive (false);
-		startButton.SetActive (false);
+		controlButton.SetActive (false);
 		levelSelectMenu.SetActive (true);
 	}
 
 	public void LoadLevel(string levelName) {
 		SceneManager.LoadScene (levelName);
+	}
+
+	public void BackToHome() {
+		controlButton.SetActive (true);
+		levelSelectButton.SetActive (true);
+		levelSelectMenu.SetActive (false);
 	}
 }

@@ -278,6 +278,7 @@ public class PlayerController : MonoBehaviour {
 		}
         if(col.tag == "collectible")
         {
+            Debug.Log("Hit by: " + col.name);
             GameObject game = col.gameObject;
             Collectible collect = game.GetComponent<Collectible>();
             if(collect.collType == Collectible.CollectibleType.Good)
@@ -292,8 +293,14 @@ public class PlayerController : MonoBehaviour {
             Destroy(game);
         }
 		if (col.tag == "hazard") {
-			hazardDecrement = 15f;
+            Debug.Log("Hit by: " + col.name);
+            hazardDecrement = 15f;
 		}
+        if(col.tag == "Death")
+        {
+            currentPhase = GamePhase.GameOver;
+            GameOver();
+        }
         if(col.tag == "endoflevel")
         {
             currentPhase = GamePhase.Victory;

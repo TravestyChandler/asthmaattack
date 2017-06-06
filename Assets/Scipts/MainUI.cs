@@ -52,6 +52,7 @@ public class MainUI : MonoBehaviour {
         StartCoroutine(HideGameOverScreen());
     }
 
+
     public IEnumerator HideGameOverScreen()
     {
         float timer = 0f;

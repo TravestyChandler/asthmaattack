@@ -219,6 +219,9 @@ public class PlayerController : MonoBehaviour {
     {
         StartCoroutine(LevelCompleteScreen());
     }
+	public void GoToLevelSelect() {
+		StartCoroutine (HideLevelCompleteScreen ());
+	}
 
     public IEnumerator LevelCompleteScreen()
     {
@@ -231,6 +234,18 @@ public class PlayerController : MonoBehaviour {
             yield return null;
         }
     }
+	public IEnumerator HideLevelCompleteScreen()
+	{
+		float timer = 0f;
+		while (timer < .5f)
+		{
+			float scaleVal = Mathf.Lerp(1f, 0f, timer / 0.5f);
+			levelCompletePanel.localScale = Vector3.one * scaleVal;
+			timer += Time.deltaTime;
+			yield return null;
+		}
+		SceneManager.LoadScene ("StartMenu");
+	}
 
     public void GameOver()
     {

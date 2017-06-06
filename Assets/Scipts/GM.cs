@@ -49,6 +49,10 @@ public class GM : MonoBehaviour {
         PlayerController.Instance.currentPhase = PlayerController.GamePhase.Playing;
 		Time.timeScale = 1.0f;
 	}
+
+	public void LoadLevelSelect() {
+		SceneManager.LoadScene ("StartMenu");
+	}
 //
 //	public void ShowLevelSelect() {
 //		levelSelectButton.SetActive (false);

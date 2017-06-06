@@ -51,7 +51,12 @@ public class GM : MonoBehaviour {
 	}
 
 	public void LoadLevelSelect() {
+        Destroy(PlayerController.Instance.gameObject);
+        PlayerController.Instance = null;
+        Destroy(MainUI.Instance.gameObject);
+        GM.instance = null;
 		SceneManager.LoadScene ("StartMenu");
+        Destroy(this.gameObject);
 	}
 //
 //	public void ShowLevelSelect() {

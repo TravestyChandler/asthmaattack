@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scipts\MainUI.cs" />
      <Compile Include="Assets\Scipts\PlayerController.cs" />
      <Compile Include="Assets\Scipts\Scroll.cs" />
+     <Compile Include="Assets\Scipts\SoundManager.cs" />
      <Compile Include="Assets\Scipts\StartGM.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

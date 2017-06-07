@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour {
     public Transform circleCastPosition;
     public float circleCastRadius = 0.5f;
     private Rigidbody2D rb;
+    public AudioClip JumpSFX;
 
     public float breathMeter = 100f;
     public float breathChange = 0.5f;
@@ -42,8 +43,9 @@ public class PlayerController : MonoBehaviour {
 	private float hazardTimer = 0.5f;
 	public float inhalerTimer = 7.0f;
 	public bool inhalerTaken = false;
-	//INHALER UI
-	public Text inhalerText;
+    public AudioClip inhalerSound;
+    //INHALER UI
+    public Text inhalerText;
 
 	//ANIMATION
 	private Animator anim;
@@ -133,11 +135,12 @@ public class PlayerController : MonoBehaviour {
 					if (inhalerCharges > 0) {
 						takingInhaler = true;
 						inhalerTaken = true;
-//						if (breathMeter + 50 >= 100) {
-//							breathMeter = 100;
-//						} else {
-//							breathMeter = breathMeter + 50;
-//						}
+                        //						if (breathMeter + 50 >= 100) {
+                        //							breathMeter = 100;
+                        //						} else {
+                        //							breathMeter = breathMeter + 50;
+                        //						}
+                        SoundManager.Instance.PlaySFX(inhalerSound);
 						inhalerCharges--;
 					}
 					anim.SetTrigger ("ExitInhaler");
@@ -270,6 +273,7 @@ public class PlayerController : MonoBehaviour {
     {
         canJump = false;
         rb.velocity += new Vector2(0f, jumpSpeed);
+        SoundManager.Instance.PlaySFX(JumpSFX);
         StartCoroutine(JumpWait());
     }
 

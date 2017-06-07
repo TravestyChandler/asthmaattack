@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnvironmentHazard : MonoBehaviour {
-
+    public AudioClip sfx;
 	// Use this for initialization
 	void Start () {
 		

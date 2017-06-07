@@ -9,7 +9,7 @@ public class DogController : MonoBehaviour {
 
 	public float runTimer;
 	public float stayTimer;
-
+    public AudioClip bark;
 	public Rigidbody2D rb;
 	Vector3 currentDirection = new Vector3 (-1.0f, 0f, 0f);
 	public float speed = 1f;
@@ -75,7 +75,8 @@ public class DogController : MonoBehaviour {
 	private void EnterStayState() {
 		currentState = STATE.STAY;
 		rb.velocity = Vector2.zero;
-//		stayTimer = Random.Range (1f, 5f);
+        //		stayTimer = Random.Range (1f, 5f);
+        SoundManager.Instance.PlaySFX(bark);
 		stayTimer = 2f;
 		UpdateStay ();
 	}

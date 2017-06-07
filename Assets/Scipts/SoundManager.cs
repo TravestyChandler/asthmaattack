@@ -6,11 +6,13 @@ public class SoundManager : MonoBehaviour {
 
     public static SoundManager Instance;
     public GameObject sfxPrefab, musicPrefab;
+    public AudioClip music;
 	// Use this for initialization
 	void Start () {
 	    if(Instance == null)
         {
             Instance = this;
+            PlayMusic(music);
         }
         else
         {

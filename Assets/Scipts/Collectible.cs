@@ -12,7 +12,7 @@ public class Collectible : MonoBehaviour {
 
     public CollectibleType collType = CollectibleType.Good;
     public float collectibleBreathChange = 20f;
-
+    public AudioClip aClip;
 	// Use this for initialization
 	void Start () {
 		

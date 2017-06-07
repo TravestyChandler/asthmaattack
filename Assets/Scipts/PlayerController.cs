@@ -294,6 +294,7 @@ public class PlayerController : MonoBehaviour {
         if(col.tag == "collectible")
         {
             Debug.Log("Hit by: " + col.name);
+            SoundManager.Instance.PlaySFX(col.gameObject.GetComponent<Collectible>().aClip);
             GameObject game = col.gameObject;
             Collectible collect = game.GetComponent<Collectible>();
             if(collect.collType == Collectible.CollectibleType.Good)
